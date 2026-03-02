@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LingoFlow - Aprenda Inglês com IA</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <!-- TELA DE LOGIN -->
+    <div id="login-screen">
+        <div class="login-content">
+            <div class="login-logo">
+                <div class="login-logo-img">
+                    <i data-lucide="languages"></i>
+                </div>
+                <h1 class="login-title">LingoFlow</h1>
+                <p class="login-subtitle">Speak English naturally with AI.</p>
+            </div>
+
+            <input type="email" class="login-input" placeholder="E-mail" id="login-email">
+            <input type="password" class="login-input" placeholder="Senha" id="login-pass">
+
+            <button class="login-btn" onclick="handleLogin()">Login</button>
+
+            <div class="social-login">
+                <div class="social-btn" onclick="window.location.href='https://appleid.apple.com/auth/authorize'">
+                    <i data-lucide="apple" style="width: 20px;"></i>
+                    Continuar com Apple
+                </div>
+                <div class="social-btn"
+                    onclick="window.location.href='https://accounts.google.com/v3/signin/identifier'">
+                    <i data-lucide="mail" style="width: 20px;"></i>
+                    Continuar com Google
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo">LingoFlow</div>
+            <div style="display: flex; align-items: center;">
+                <div class="dark-mode-toggle" id="theme-toggle" onclick="toggleTheme()">
+                    <i data-lucide="moon"></i>
+                </div>
+                <div class="profile-pic" onclick="switchTab('profile')"></div>
+            </div>
+        </header>
+
+        <main>
+            <!-- ABA HOME -->
+            <div id="home-tab" class="tab-content active">
+                <h1>Olá, <span id="display-name">Marcio</span>!</h1>
+                <section>
+                    <div class="call-card" onclick="startAICall()">
+                        <div class="call-icon-container">
+                            <i data-lucide="bot"></i>
+                        </div>
+                        <h2>Professor de IA (Voz)</h2>
+                        <p>Pratique agora com Alex, nosso tutor IA</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="section-title">Tutores Online</h2>
+                    <div class="tutor-card" onclick="startCall('Sarah Connor')">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" class="tutor-img">
+                        <div class="tutor-info">
+                            <div class="tutor-name">Sarah Connor</div>
+                            <div class="tutor-status">Disponível agora</div>
+                        </div>
+                        <i data-lucide="video" style="color: var(--apple-blue)"></i>
+                    </div>
+                    <div class="tutor-card" onclick="startCall('James Wilson')">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100" class="tutor-img">
+                        <div class="tutor-info">
+                            <div class="tutor-name">James Wilson</div>
+                            <div class="tutor-status">Disponível agora</div>
+                        </div>
+                        <i data-lucide="video" style="color: var(--apple-blue)"></i>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ABA DE CONVERSAS (LISTA DE CONTATOS) -->
+            <div id="messages-tab" class="tab-content">
+                <h1>Conversas</h1>
+                <div id="chat-list-view">
+                    <div class="chat-item" onclick="openChat('Alex (IA Teacher)')">
+                        <div class="chat-avatar"
+                            style="width:60px; height:60px; border-radius:50%; background: linear-gradient(135deg, #007AFF, #00C6FF); display:flex; align-items:center; justify-content:center; margin-right:16px;">
+                            <i data-lucide="bot" style="color:white"></i>
+                        </div>
+                        <div class="chat-item-info">
+                            <div class="chat-item-header">
+                                <span class="chat-item-name">Alex (IA Teacher)</span>
+                                <span class="chat-item-time">22:15</span>
+                            </div>
+                            <div class="chat-item-last">Hello Marcio! I'm ready to help you...</div>
+                        </div>
+                    </div>
+                    <div class="chat-item" onclick="openChat('Sarah Connor')">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100"
+                            class="chat-item-img">
+                        <div class="chat-item-info">
+                            <div class="chat-item-header">
+                                <span class="chat-item-name">Sarah Connor</span>
+                                <span class="chat-item-time">Ontem</span>
+                            </div>
+                            <div class="chat-item-last">See you in our next class!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHAT INTERFACE (DENTRO DA ABA) -->
+                <div id="chat-detail-view" style="display:none;">
+                    <div class="chat-view-header">
+                        <i data-lucide="chevron-left" class="chat-back" onclick="closeChat()"></i>
+                        <span id="chat-with-name" style="font-weight:600">Alex</span>
+                    </div>
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chat-messages"></div>
+                        <div class="chat-input-area">
+                            <i data-lucide="plus" style="color: var(--apple-blue)"></i>
+                            <input type="text" class="chat-input" id="chat-input" placeholder="Mensagem...">
+                            <div class="send-btn" onclick="sendChatMessage()">
+                                <i data-lucide="send"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABA DE AMIGOS -->
+            <div id="users-tab" class="tab-content">
+                <h1>Amigos</h1>
+                <div class="search-container">
+                    <i data-lucide="search" style="color: #8E8E93"></i>
+                    <input type="text" class="search-input" placeholder="Buscar amigos...">
+                </div>
+
+                <div class="friends-list">
+                    <div class="friend-card">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100"
+                            class="friend-avatar">
+                        <div class="friend-info">
+                            <div class="friend-name">Sarah Connor</div>
+                            <div class="friend-level">Level 42 • Advanced</div>
+                        </div>
+                        <i data-lucide="message-circle" style="color: var(--apple-blue)"
+                            onclick="switchTab('messages'); openChat('Sarah Connor')"></i>
+                    </div>
+
+                    <div class="friend-card">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100"
+                            class="friend-avatar">
+                        <div class="friend-info">
+                            <div class="friend-name">James Wilson</div>
+                            <div class="friend-level">Level 28 • Intermediate</div>
+                        </div>
+                        <i data-lucide="message-circle" style="color: var(--apple-blue)"
+                            onclick="switchTab('messages'); openChat('James Wilson')"></i>
+                    </div>
+
+                    <div class="friend-card">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100"
+                            class="friend-avatar">
+                        <div class="friend-info">
+                            <div class="friend-name">Emma Stone</div>
+                            <div class="friend-level">Level 15 • Beginner</div>
+                        </div>
+                        <i data-lucide="message-circle" style="color: var(--apple-blue)"></i>
+                    </div>
+                </div>
+
+                <div class="invite-section">
+                    <i data-lucide="user-plus"
+                        style="width: 40px; height: 40px; color: var(--apple-blue); margin-bottom: 10px;"></i>
+                    <h3>Convide seus amigos</h3>
+                    <p style="font-size: 14px; color: var(--apple-text-secondary); margin-top: 5px;">Aprender inglês é
+                        melhor acompanhado! Ganhe 1 semana de Premium por cada convite.</p>
+                    <div class="invite-btn">Enviar Convite</div>
+                </div>
+            </div>
+
+            <!-- ABA PERFIL -->
+            <div id="profile-tab" class="tab-content">
+                <h1>Perfil</h1>
+                <div class="profile-section">
+                    <div class="profile-avatar-large">
+                        <i data-lucide="user"></i>
+                    </div>
+                    <h2 class="profile-name" id="profile-user-name">Marcio</h2>
+                    <div class="status-input-container">
+                        <i data-lucide="smile" style="color: var(--apple-text-secondary)"></i>
+                        <input type="text" class="status-input" id="user-status" placeholder="Qual o seu status hoje?"
+                            value="Learning English Every Day! 🚀">
+                    </div>
+
+                    <div class="info-box">
+                        <h3 style="margin-bottom:15px">Informações Pessoais</h3>
+                        <div class="info-row">
+                            <span class="info-label">Nível</span>
+                            <span class="info-value">Intermediário B2</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">País</span>
+                            <span class="info-value">Brasil 🇧🇷</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Aulas Concluídas</span>
+                            <span class="info-value">124</span>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <h3 style="margin-bottom:15px">Troféus de Evolução</h3>
+                        <div class="trophy-grid">
+                            <div class="trophy-item">
+                                <div class="trophy-icon"><i data-lucide="zap"></i></div>
+                                <span class="trophy-name">7 Dias Ofensiva</span>
+                            </div>
+                            <div class="trophy-item">
+                                <div class="trophy-icon"><i data-lucide="award"></i></div>
+                                <span class="trophy-name">Primeira Call</span>
+                            </div>
+                            <div class="trophy-item">
+                                <div class="trophy-icon"><i data-lucide="star"></i></div>
+                                <span class="trophy-name">Fluência 50%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <nav class="bottom-nav glass">
+            <div class="nav-item active" onclick="switchTab('home')"><i data-lucide="home"></i></div>
+            <div class="nav-item" onclick="switchTab('messages')"><i data-lucide="message-square"></i></div>
+            <div class="nav-item" onclick="switchTab('users')"><i data-lucide="users"></i></div>
+            <div class="nav-item" onclick="switchTab('profile')"><i data-lucide="user"></i></div>
+        </nav>
+    </div>
+
+    <!-- Call Overlay -->
+    <div id="call-overlay">
+        <div style="text-align: center; width: 100%;">
+            <div class="call-avatar" id="active-avatar"
+                style="background: linear-gradient(135deg, #007AFF, #00C6FF); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="bot" id="call-bot-icon" style="width: 60px; height: 60px; color: white;"></i>
+            </div>
+            <h2 class="caller-name" id="active-name">Tutor</h2>
+            <div class="call-status" id="active-status">Chamando...</div>
+            <div id="ai-chat-display"
+                style="margin-top: 40px; padding: 20px; font-size: 18px; min-height: 100px; color: rgba(255,255,255,0.8);">
+            </div>
+        </div>
+        <div class="call-actions">
+            <div class="action-btn decline" onclick="endCall()"><i data-lucide="phone-off"></i></div>
+            <div class="action-btn accept" id="accept-btn" onclick="acceptCall()"><i data-lucide="phone"></i></div>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin() {
+            const email = document.getElementById('login-email').value;
+            const screen = document.getElementById('login-screen');
+
+            if (!email.includes('@')) {
+                alert('Por favor, insira um e-mail válido.');
+                return;
+            }
+
+            // Transição suave estilo iOS
+            screen.classList.add('hidden');
+
+            // Atualiza nome no app se quiser
+            if (email) {
+                const name = email.split('@')[0];
+                document.getElementById('display-name').innerText = name.charAt(0).toUpperCase() + name.slice(1);
+                document.getElementById('profile-user-name').innerText = name.charAt(0).toUpperCase() + name.slice(1);
+            }
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+
+            const icon = document.querySelector('#theme-toggle i');
+            if (newTheme === 'dark') {
+                icon.setAttribute('data-lucide', 'sun');
+            } else {
+                icon.setAttribute('data-lucide', 'moon');
+            }
+            lucide.createIcons();
+        }
+
+        lucide.createIcons();
+
+        let isAI = false;
+        let recognition;
+        let synthesis = window.speechSynthesis;
+        const aiChatDisplay = document.getElementById('ai-chat-display');
+
+        // Speech recognition setup
+        if ('webkitSpeechRecognition' in window) {
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.lang = 'en-US';
+            recognition.onresult = (e) => {
+                const text = e.results[0][0].transcript;
+                aiChatDisplay.innerText = "Você: " + text;
+                processAIResponse(text);
+            };
+            recognition.onend = () => { if (isAI && !synthesis.speaking) recognition.start(); };
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            document.getElementById(tabName + '-tab').classList.add('active');
+
+            // Highlight nav item
+            const index = ['home', 'messages', 'users', 'profile'].indexOf(tabName);
+            if (index !== -1) document.querySelectorAll('.nav-item')[index].classList.add('active');
+
+            if (tabName === 'messages') closeChat();
+        }
+
+        function openChat(name) {
+            document.getElementById('chat-list-view').style.display = 'none';
+            document.getElementById('chat-detail-view').style.display = 'block';
+            document.getElementById('chat-with-name').innerText = name;
+            document.getElementById('chat-messages').innerHTML = `<div class="message received">Iniciando conversa com ${name}...</div>`;
+        }
+
+        function closeChat() {
+            document.getElementById('chat-list-view').style.display = 'block';
+            document.getElementById('chat-detail-view').style.display = 'none';
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const msg = input.value.trim();
+            if (!msg) return;
+            addMessage(msg, 'sent');
+            input.value = '';
+            setTimeout(async () => {
+                const res = await getMockAIResponse(msg);
+                addMessage(res, 'received');
+            }, 1000);
+        }
+
+        function addMessage(text, type) {
+            const container = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            div.className = `message ${type}`;
+            div.innerHTML = `${text}<div class="message-time">${new Date().getHours()}:${new Date().getMinutes().toString().padStart(2, '0')}</div>`;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function startAICall() {
+            isAI = true;
+            document.getElementById('call-bot-icon').style.display = 'block';
+            startCall('Alex (AI Teacher)');
+        }
+
+        function startCall(name) {
+            const overlay = document.getElementById('call-overlay');
+            document.getElementById('active-name').innerText = name;
+            overlay.style.display = 'flex';
+        }
+
+        function acceptCall() {
+            document.getElementById('accept-btn').style.display = 'none';
+            document.getElementById('active-status').innerText = '00:01';
+            if (isAI) {
+                speak("Hello Marcio! I'm Alex. Ready to practice?");
+            }
+        }
+
+        function endCall() {
+            document.getElementById('call-overlay').style.display = 'none';
+            isAI = false;
+            synthesis.cancel();
+            if (recognition) recognition.stop();
+        }
+
+        async function getMockAIResponse(text) {
+            await new Promise(r => setTimeout(r, 500));
+            return "That's great! Tell me more in English.";
+        }
+
+        function speak(text) {
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = 'en-US';
+            u.onend = () => { if (isAI) recognition.start(); };
+            synthesis.speak(u);
+        }
+
+        // Live status update handle
+        document.getElementById('user-status').addEventListener('input', (e) => {
+            console.log("Status updated:", e.target.value);
+        });
+    </script>
+</body>
+
+</html>

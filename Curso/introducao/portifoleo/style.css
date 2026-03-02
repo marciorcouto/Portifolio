@@ -1,0 +1,150 @@
+:root {
+    --apple-bg: #f5f5f7;
+    --apple-card: #ffffff;
+    --apple-text: #1d1d1f;
+    --apple-skill-bg: rgba(0, 0, 0, 0.03);
+    --apple-text-secondary: #86868b;
+    --apple-accent: #0066cc;
+    --font-main: 'Outfit', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle at top left, #e0e0e0, #f5f5f7, #d2d2d7);
+    background-color: var(--apple-bg);
+    font-family: var(--font-main);
+    color: var(--apple-text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.hero {
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    padding: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    max-width: 600px;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.04);
+    text-align: center;
+
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+h2 {
+    color: var(--apple-text-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+p {
+    line-height: 1.6;
+    color: var(--apple-text-secondary);
+    margin-bottom: 2rem;
+}
+
+a {
+    color: var(--apple-accent);
+    text-decoration: none;
+    display: inline-block;
+    background-color: var(--apple-accent);
+    color: var(--apple-card);
+    padding: 0.8rem 1.2rem;
+    border-radius: 50px;
+    transition: background-color 0.3s;
+}
+
+a:hover {
+    opacity: 0.8;
+    transform: scale(0.98);
+}
+
+.avatar-container {
+    margin-bottom: 2rem;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 25px;
+    border: 4px solid white;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 2.5rem;
+}
+
+.skills-item {
+    background-color: var(--apple-skill-bg);
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+
+}
+
+.projects-section {
+    text-align: left;
+    margin-top: 2rem;
+}
+
+.projects-section h3 {
+    font-size: 1.1rem;
+    color: var(--apple-text);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.project-info h4 {
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.project-info p {
+    font-size: 0.85rem;
+    margin-bottom: 0;
+}
+
+.project-tag {
+    color: var(--apple-accent);
+    background: rgba(0, 102, 204, 0.1);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
