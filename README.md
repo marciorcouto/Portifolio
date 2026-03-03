@@ -1,4 +1,53 @@
-# Portfólio 
-alguns projetos criados pelo curso udemy e autodidata. 
+# 👩🏻‍💻 Marcio Couto
 
-Repositório criado a partir do Curso de Git e GitHub do Gustavo Guanabara
+**`Desenvolvedor Front-End`**
+
+Me chamo Marcio Roberto Santiago Couto filho, tenho 29 anos e sou natural de Franca, São Paulo. Concluí o ensino médio na E.E João Marciano de Almeida, tambem concluí técnico em informática. Atualmente, estou cursando Análise e Desenvolvimento de Sistemas na Cruzeiro do Sul Educacional. Sou apaixonado por tecnologia e pretendo evoluir meus conhecimentos somando a facilitação da vida e experiencia dos usuarios.
+
+<p align="left">
+  
+</p>
+
+
+
+---
+
+### 🤖 Linguagens e Tecnologias
+
+<img 
+    align="left" 
+    alt="HTML"
+    title="HTML" 
+    width="30px" 
+    style="padding-right: 10px;" 
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" 
+/>
+<img 
+    align="left" 
+    alt="CSS" 
+    title="CSS"
+    width="30px" 
+    style="padding-right: 10px;" 
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" 
+/>
+<img 
+    align="left" 
+    alt="JavaScript" 
+    title="JavaScript"
+    width="30px" 
+    style="padding-right: 10px;" 
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" 
+/>
+<img 
+    align="left" 
+    alt="Git" 
+    title="Git"
+    width="30px" 
+    style="padding-right: 10px;" 
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" 
+/>
+
+
+<br/>
+<br/>
+
