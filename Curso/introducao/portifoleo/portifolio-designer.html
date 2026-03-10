@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="portifolio-designer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Portfólio de Designer - Marcio Couto</title>
+</head>
+
+<body>
+    <main>
+        <section class="gallery-container">
+            <header>
+                <div class="header-nav">
+                    <a href="Index.html" class="back-link">← Voltar</a>
+                </div>
+                <h1>Portfólio de Designer</h1>
+                <p>Exploração visual, UI Design e ilustrações.</p>
+            </header>
+
+            <div class="gallery-grid">
+                <div class="gallery-item wide" onclick="openVisualizer(this)">
+                    <img src="images/design1.jpg" alt="UI Design 1">
+                    <div class="item-overlay">
+                        <span>Campanha de Black Friday</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openVisualizer(this)">
+                    <img src="images/design2.jpg" alt="UI Design 2">
+                    <div class="item-overlay">
+                        <span>Identificação de Marca</span>
+                    </div>
+                </div>
+                <div class="gallery-item featured" onclick="openVisualizer(this)">
+                    <img src="images/design3.webp" alt="UI Design 3">
+                    <div class="item-overlay">
+                        <span>Banners</span>
+                    </div>
+                </div>
+                <div class="gallery-item tall" onclick="openVisualizer(this)">
+                    <img src="images/design4.jpg" alt="UI Design 4">
+                    <div class="item-overlay">
+                        <span>Lançamento de submarca</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openVisualizer(this)">
+                    <img src="images/design5.jfif" alt="UI Design 5">
+                    <div class="item-overlay">
+                        <span>Identificação de marca</span>
+                    </div>
+                </div>
+                <div class="gallery-item big" onclick="openVisualizer(this)">
+                    <img src="images/design6.jpeg" alt="UI Design 6">
+                    <div class="item-overlay">
+                        <span>Identificação de marca</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openVisualizer(this)">
+                    <img src="images/design7.jpeg" alt="UI Design 7">
+                    <div class="item-overlay">
+                        <span>Identificação de marca</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openVisualizer(this)">
+                    <img src="images/design8.jpeg" alt="UI Design 8">
+                    <div class="item-overlay">
+                        <span>Identificação de marca</span>
+                    </div>
+                </div>
+                <div class="gallery-item wide" onclick="openVisualizer(this)">
+                    <img src="images/design9.jpeg" alt="UI Design 9">
+                    <div class="item-overlay">
+                        <span>Identificação de marca</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openVisualizer(this)">
+                    <img src="images/design11.jpeg" alt="UI Design 11">
+                    <div class="item-overlay">
+                        <span>Identificação de marca</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="visualizer" class="visualizer">
+        <div class="visualizer-header">
+            <button class="back-to-gallery" onclick="closeVisualizer()">← Voltar para Galeria</button>
+        </div>
+        <div class="visualizer-content">
+            <img id="visualizer-img" src="" alt="Full View Image">
+        </div>
+    </div>
+
+    <script>
+        function openVisualizer(element) {
+            const imgSrc = element.querySelector('img').src;
+            const visualizer = document.getElementById('visualizer');
+            const visualizerImg = document.getElementById('visualizer-img');
+
+            visualizerImg.src = imgSrc;
+            visualizer.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVisualizer() {
+            const visualizer = document.getElementById('visualizer');
+            visualizer.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+
+</html>
